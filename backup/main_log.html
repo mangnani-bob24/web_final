@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mang Na Ni</title>
+    <link rel="stylesheet" href="main_log.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="main_log.html">팀 소개</a></li>
+                <li><a href="wargame_log.html">워게임</a></li>
+                <li><a href="announce_log.html">홍보 및 소식</a></li>
+                <li class="right"><img src="../images/id_icon.svg" alt="User Icon" class="id-icon" id="userIcon">BOB님</li>
+            </ul>
+        </nav>
+    </header>
+
+        <!-- 메시지 박스 -->
+        <div class="box">
+            <div class="message">
+                <p>BOB님<br>bob@gmail.com</br>현재 점수 ${score}</p>
+                <div class="button_box">
+                    <button class="logout_button"><a href="../main.html">로그아웃</a></button>
+                    <button class="close_button">닫기</button>
+                </div>
+            </div>
+        </div>
+
+    <main>
+        <!-- 상단 이미지 -->
+        <div class="banner">
+            <img src="../images/banner2.svg" alt="logo" />
+        </div>
+    
+        <!-- 좌우 배치 -->
+        <div class="content">
+            <!-- 왼쪽 섹션 -->
+            <section class="profile">
+                <div class="profile-box">
+                    <h3>환영합니다</h3>
+                    <h4>BoB 님</h4>
+                    <img src="../images/mainid_icon.svg" alt="logo" />
+                    <h3>현재 점수 400 점</h3>
+                </div>
+            </section>
+    
+            <!-- 오른쪽 섹션 -->
+            <section class="progress">
+                <button class="game-button">워게임 풀러가기</button><br></br>
+                <h2>위게임 진행률</h2>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 60%;"></div>
+                </div>
+                <h3> 완주까지&nbsp;<span>6문제</span></h3>
+            </section>
+        </div>
+    </main>    
+    <script>
+        // 아이콘 클릭 시 메시지 박스 열기
+        const userIcon = document.getElementById('userIcon');
+        const box = document.querySelector('.box');
+        const closeButton = document.querySelector('.close_button');
+    
+        userIcon.addEventListener('click', function() {
+            box.classList.add('box_active');
+        });
+    
+        closeButton.addEventListener('click', function() {
+            box.classList.remove('box_active');
+        });
+    </script>
+</body>
+</html>

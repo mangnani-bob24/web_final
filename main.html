@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="main.css">
+    <style>
+        h1 {
+            font-size: 3em;
+            margin-top: 0.5em;
+        }
+
+        .banner {
+            max-width: 100%;
+        }
+
+        .sub-title {
+            background-color: #fff;
+            font-size: 1.5em;
+            padding: 10px;
+        }
+
+        .box {
+            display: none; /* 초기에는 숨김 상태 */
+            background-color: #f0f0f0;
+            padding: 20px;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+        }
+
+        .box_active {
+            display: block; /* 활성화되면 보이도록 */
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="main.html">팀 소개</a></li>
+                <li><a href="wargame.html">워게임</a></li>
+                <li><a href="announce.html">홍보 및 소식</a></li>
+                <li class="right"><a href="login.html">로그인</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <aside><img src="images/bob.jpg" alt="bob-logo" style="width: 100px; height: auto;"></aside>
+        <article>
+            <img src="images/banner1.svg" alt="logo" style="width: 1000px; height: auto;" />
+            <div class="container">
+                <q><a class="open_button" type="button">워게임 배경설명</a></q>
+                <div class="box">
+                    <p class="heading">워게임 배경설명</p>
+                    <div class="message_box">
+                        <p class="message">금융권의 망분리 규제가 완화됨에 따라 생성형 AI 활용이 허용되고,클라우드 기반 응용 프로그램(SaaS) 사용이 대폭 확대되었습니다. 이러한 환경 변화에 발맞춰 망나니 기업은 내부망의 업무 환경을 전면 개편하여 클라우드 중심의 새로운 인프라를 도입하였습니다.
+                            우리는 외부 침입 경로를 통해 망나니의 내부망에 성공적으로 접근하였으며, 최신 클라우드 서비스를 탐지하였습니다.이 서비스에서 다양한 취약점들을 발견하고 공략해보세요.
+                            </p>
+                        <div class="button_box">
+                            <button class="close_button" type="button">확인</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <q><a href="wargame.html">워게임 풀러가기</a></q>
+        </article>
+    </main>
+
+    <!-- script 이용해서 JavaScript 코드 추가 -->
+    <script>
+        // 요소 선택
+        let box = document.querySelector('.box');
+        let open_button = document.querySelector('.open_button');
+        let close_button = document.querySelector('.close_button');
+
+        // '워게임 배경설명' 버튼 클릭 시 박스 열기
+        open_button.onclick = function () {
+            box.classList.add('box_active');
+        };
+
+        // 'OK' 버튼 클릭 시 박스 닫기
+        close_button.onclick = function () {
+            box.classList.remove('box_active');
+        };
+    </script>
+</body>
+
+</html>

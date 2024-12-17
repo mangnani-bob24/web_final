@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시판 예제</title>
+    <link rel="stylesheet" href="announce_log.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="main_log.html">팀 소개</a></li>
+                <li><a href="wargame_log.html">워게임</a></li>
+                <li><a href="announce_log.html">홍보 및 소식</a></li>
+                <li class="right">
+                    <img src="../images/id_icon.svg" alt="User Icon" class="id-icon" id="userIcon">
+                    <span id="userName">사용자님</span>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+     <!-- 메시지 박스 -->
+     <div class="box">
+        <div class="message">
+            <p id="userInfo">사용자 정보</p>
+            <div class="button_box">
+                <button class="logout_button"><a href="/logout">로그아웃</a></button>
+                <button class="close_button">닫기</button>
+            </div>
+        </div>
+    </div>
+   
+<!-- 가운데 정렬된 이미지 추가 -->
+<div class="image-banner">
+    <img src="../images/newsletter_banner.svg" alt="Center Image" class="banner-image">
+</div>
+
+
+<!-- 게시판 목록 -->
+<div class="t_list">
+    <ul>
+      <li>
+        <a href="../announce_text/announce_text1_log.html">가이드라인 위키독스</a>
+        <span>2024-12-08</span>
+      </li>
+      <li>
+        <a href="../announce_text/announce_text2_log.html"
+          >가이드라인 소개 카드뉴스</a
+        >
+        <span>2024-12-02</span>
+      </li>
+      <li>
+        <a href="../announce_text/announce_text3_log.html">공모전 수상</a>
+        <span>2024-11-30</span>
+      </li>
+    </ul>
+</div>
+
+<!-- 페이지네이션 -->
+<div class="paginate">
+    <a class="pre" href="#">  </a>
+    <strong>1</strong>
+    <a href="#">2</a>
+    <a href="#">3</a>
+    <a class="next" href="#">  </a>
+</div>
+
+<script>
+    // 아코디언 기능 구현
+    const buttons = document.querySelectorAll('.btbt01, .btbt02, .btbt03');
+    buttons.forEach(button => {
+        button.addEventListener('click', function() {
+            const content = this.nextElementSibling;
+            content.style.display = (content.style.display === 'block') ? 'none' : 'block';
+        });
+    });
+</script>
+
+<script>
+    // 메시지 박스 열기/닫기
+    const userIcon = document.getElementById('userIcon');
+    const box = document.querySelector('.box');
+    const closeButton = document.querySelector('.close_button');
+
+    userIcon.addEventListener('click', function() {
+        box.classList.add('box_active');
+    });
+
+    closeButton.addEventListener('click', function() {
+        box.classList.remove('box_active');
+    });
+
+    // 서버에서 사용자 데이터 가져오기
+    async function fetchUserData() {
+        try {
+            const response = await fetch('/getUserData'); // 서버에서 사용자 데이터 요청
+            if (response.ok) {
+                const data = await response.json();
+                // 사용자 데이터 삽입
+                document.getElementById('userName').textContent = `${data.name}님`;
+                document.getElementById('userInfo').innerHTML = `
+                    ${data.name}님<br>${data.email}<br>현재 점수: ${data.totalScore}`;
+            } else {
+                console.error('사용자 데이터를 가져오는 데 실패했습니다.');
+            }
+        } catch (err) {
+            console.error('사용자 데이터 요청 실패:', err);
+        }
+    }
+
+    // 페이지 로드 시 사용자 데이터 가져오기 실행
+    fetchUserData();
+</script>
+
+</body>
+</html>

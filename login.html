@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="login.css">
+    <title>로그인 - SynBio Ltd</title>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="main.html">팀 소개</a></li>
+                <li><a href="wargame.html">워게임</a></li>
+                <li><a href="announce.html">홍보 및 소식</a></li>
+                <li class="right"><a href="login.html">로그인</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <article>
+            <div class="center">
+                <h1>환영합니다</h1>
+                <form id="loginForm" method="post">
+                    <div class="txt_field">
+                        <input type="email" name="email" id="email" required />
+                        <span></span>
+                        <label>이메일</label>
+                    </div>
+
+                    <div class="txt_field">
+                        <input type="password" name="password" id="password" required />
+                        <span></span>
+                        <label>비밀번호</label>
+                    </div>
+
+                    <div class="forgot">
+                        * 만일 비밀번호를 잊으셨다면 재가입 부탁드립니다
+                    </div>
+
+                    <input type="submit" value="로그인">
+                    <div class="users_signup">
+                        아직 계정이 없으신가요? <a href="signup.html">회원가입</a>
+                    </div>
+                </form>
+            </div>
+        </article>
+    </main>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async function (event) {
+            event.preventDefault(); // 폼 기본 제출 방지
+
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+
+            try {
+                const response = await fetch('/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email, password }),
+                });
+
+                console.log('서버 응답:', response);
+                if (response.ok) {
+                    const result = await response.json();
+                    alert(`로그인 성공: ${result.message}`);
+                    window.location.href = '/afterlogin/main_log.html'; // 로그인 성공 시 이동할 페이지
+                } else {
+                    const error = await response.json();
+                    console.log('로그인 실패 응답:', error);
+                    alert(`로그인 실패: ${error.message}`);
+                }
+            } catch (err) {
+                console.error('로그인 요청 실패:', err);
+                alert('로그인 요청 중 문제가 발생했습니다.');
+            }
+        });
+    </script>
+</body>
+
+</html>

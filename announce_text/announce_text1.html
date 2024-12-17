@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wiki Docs Slider</title>
+    <link rel="stylesheet" href="announce_text.css" />
+  </head>
+
+  <body>
+    <header>
+      <nav>
+        <ul>
+          <li><a href="../main.html">팀 소개</a></li>
+          <li><a href="../wargame.html">워게임</a></li>
+          <li><a href="../announce.html">홍보 및 소식</a></li>
+          <li class="right"><a href="../login.html">로그인</a></li>
+        </ul>
+      </nav>
+    </header>
+    <div class="slider">
+      <div class="slider-content">
+        <div class="arrow left" onclick="prevSlide()">&#8249;</div>
+        <h1 id="slider-title"></h1>
+        <div class="arrow right" onclick="nextSlide()">&#8250;</div>
+      </div>
+      <h2 id="slider-date"></h2>
+      <div class="slide">
+        <img id="slider-image" src="" alt="슬라이드 이미지" />
+        <p id="slider-text"></p>
+      </div>
+    </div>
+
+    <!-- JavaScript 코드 -->
+    <script>
+      let currentSlide = 0;
+      const slides = [
+        {
+          title: "가이드라인 위키독스",
+          date: "2024.12.08",
+          image: "../images/wikidocs_ppt.svg",
+          text: "Wiki Docs에 「금융권 SaaS 활용 생성형 AI 가이드라인」 등재 및 출판\n\n해당 가이드라인은 금융권이 SaaS와 생성형 AI를 안전하게 도입하고 운영할 수 있는 구체적인 기준과 방향성을 제시한다.\n\n먼저 SaaS는 클라우드 환경에서 소프트웨어를 제공하는 서비스로, 유지보수 비용 절감과 유연한 시스템 확장이 가능하다는 장점이 있다. 생성형 AI는 대규모 데이터를 기반으로 콘텐츠를 생성할 수 있는 기술로, 금융상품 추천, 고객 상담, 리스크 관리 등 다양한 분야에서 활용될 수 있다. 금융권은 오랜 기간 보안을 강화하기 위해 내부망과 외부망을 분리해 운영해왔지만, 이는 디지털 혁신을 제약하는 요인으로 작용하기도 했다. 이번 망분리 규제 완화는 이러한 제약을 완화해 클라우드와 AI 기술을 활용할 수 있는 길을 열었다. \n\n이 가이드라인은 SaaS와 생성형 AI 도입 시 금융기관이 보안을 유지하면서 혁신 기술을 활용하도록 돕기 위해 설계되었다. 적용 범위는 금융기관이 SaaS 기반 서비스를 도입하거나 생성형 AI 모델을 활용할 때 필요한 보안 체계를 수립하는 데 초점을 맞춘다. 이를 통해 금융기관은 자율적이면서도 신뢰할 수 있는 보안 체계를 구축하고, 디지털 기술 활용으로 효율성과 경쟁력을 높일 수 있을 것으로 기대된다. 가이드라인은 크게 두 가지 주요 기술 영역, 즉 SaaS와 생성형 AI에 대한 보안 관리 방안을 다룬다. SaaS 보안 관리에서는 사용자 단말기의 보안을 강화하기 위한 암호화 및 접근 제어, SaaS 제공자가 데이터를 안전하게 관리하기 위한 인증 및 네트워크 보안, 그리고 SaaS 운영 정책에 필요한 보안 절차를 상세히 다룬다. 생성형 AI 보안 관리에서는 공통적으로 필요한 데이터 관리와 신뢰성 검증을 포함해 SaaS 환경에서 생성형 AI를 활용할 때 요구되는 보안 대책과 자체 추가 학습 시 데이터를 보호하는 방법을 제시한다.\n\n또한, 이 가이드라인은 SaaS와 생성형 AI 활용 시 발생할 수 있는 침해 시나리오를 예측하고, 이에 대한 대응 방안을 제공한다. 특히, 국제적으로 널리 사용되는 CSA(Cloud Security Alliance) 위협 분류를 기준으로 잠재적인 보안 리스크를 식별하고, 구체적인 예방책을 마련하는 데 중점을 둔다. 이와 더불어 서비스 도입과 운영 시 보안을 점검할 수 있는 체크리스트를 제공해 금융기관이 실질적인 자율 보안 체계를 구축할 수 있도록 돕는다.\n\n금융권의 망분리 규제 완화는 단순히 새로운 기술을 도입하는 것을 넘어 보안과 혁신의 균형을 맞추는 중요한 과제이다. 이 가이드라인은 금융기관이 변화하는 환경에서 기술 혁신과 보안 강화를 동시에 달성할 수 있는 구체적인 로드맵을 제시한다",
+        },
+        {
+          title: "가이드라인 소개 카드뉴스",
+          date: "2024.12.02",
+          image: "../images/guideline_cardnews.svg",
+        },
+        {
+          title: "공모전 수상",
+          date: "2024.11.30",
+          image: "../images/contest_ppt.svg",
+          text: "과학기술정보통신부, 한국정보보호산업협회에서 주최 및 주관한 제 2회 '2024 정보보호 정책제안 공모전'의 수상 결과가 발표됐다. 이번 공모전은 1차 서류 심사, 2차 발표 평가를 거쳐 총 6팀이 최종 수상팀으로 선정됐다. 올해 공모전 최우수상은 ‘금융권 생성형 AI의 안전한 사용 방안'을 제안한 망나니팀(망을 나누는 이들)이 수상했다. 주요 제안으로는 정보보호 및 개인정보보호 관리체계 인증(ISMS-P) 고도화, 생성형 AI 정보처리지침 및 라벨링 고지 등이 있었다.\n\n특히, 금년 8월 발표된 금융 분야의 망분리 개선 로드맵에 초점을 맞춰 기존에 제한되었던 SaaS와 생성형 AI (Generative AI)이 허용됨에 따라 예상되는 혼선에 대한 대책 가이드라인을 작성한다는 제언이 중점으로 다뤄졌다.도입되는 망분리 규제 완화 배경의 핵심 골자는 자율보안-결과책임 원칙이다. 기존의 강력한 규제를 완화하는 대신, 각 금융기관이 자율적으로 보안 수준을 관리하고 책임을 지는 체계로 전환됨에 따라, 기업의 보안 능력에 대한 신뢰와 관리 체계가 더욱 중요해진다. 금융사들은 생성형 AI와 SaaS 활용이 가능하게 된 환경에서 클라우드 기반 인프라의 보안성을 유지하면서도 신속하고 유연한 서비스 개발이 가능한 자율적 보안 운영 체계를 구축할 필요가 있다. \n\n 망나니 팀이 제작한 가이드라인은 금융권의 新자율 보안 체제를 적극 지지하며, 기업들이 규제 완화에 대한 책임을 갖고 데이터 암호화, 접근 제어, 실시간 모니터링과 같은 보안 강화 방안을 자율적으로 마련하는 데 있어 참고할 수 있는 여러 자료들을 망라하고 있다. 금융 데이터와 클라우드 환경을 연결하는 과정에서 발생 가능한 위험 요소를 예측할 수 있는 아키텍처와, 자체적으로 리스크 관리 체계를 강화 및 점검할 수 있는 체크리스트를 포함하여 실질적인 보안 환경의 운영을 돕는다. '금융권 생성형 AI 및 SaaS의 안전한 사용 방안 가이드라인'이라는 이름으로 출간된 위 내용의 가이드라인은 위키독스에서 확인할 수 있다.",
+        },
+      ];
+
+      function updateSlide() {
+        const titleElement = document.getElementById("slider-title");
+        const dateElement = document.getElementById("slider-date");
+        const textElement = document.getElementById("slider-text");
+        const imageElement = document.getElementById("slider-image");
+
+        titleElement.textContent = slides[currentSlide].title;
+        dateElement.textContent = slides[currentSlide].date;
+        textElement.textContent = slides[currentSlide].text;
+        imageElement.src = slides[currentSlide].image;
+
+        textElement.innerHTML = slides[currentSlide].text.replace(
+          /\n/g,
+          "<br>"
+        );
+      }
+
+      function nextSlide() {
+        currentSlide = (currentSlide + 1) % slides.length;
+        updateSlide();
+      }
+
+      function prevSlide() {
+        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+        updateSlide();
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        updateSlide();
+      });
+    </script>
+  </body>
+</html>

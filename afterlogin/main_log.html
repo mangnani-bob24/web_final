@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mang Na Ni</title>
+    <link rel="stylesheet" href="main_log.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="main_log.html">팀 소개</a></li>
+                <li><a href="wargame_log.html">워게임</a></li>
+                <li><a href="announce_log.html">홍보 및 소식</a></li>
+                <li class="right">
+                    <img src="../images/id_icon.svg" alt="User Icon" class="id-icon" id="userIcon">
+                    <span id="userName">사용자님</span>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- 메시지 박스 -->
+    <div class="box">
+        <div class="message">
+            <p id="userInfo">사용자님<br>example@example.com<br>현재 점수: <span id="score">0</span></p>
+            <div class="button_box">
+                <button class="logout_button" id="logoutButton">로그아웃</button>
+                <button class="close_button">닫기</button>
+            </div>
+        </div>
+    </div>
+
+    <main>
+        <!-- 상단 이미지 -->
+        <div class="banner">
+            <img src="../images/banner2.svg" alt="logo" />
+        </div>
+    
+        <!-- 프로필 -->
+        <div class="content">
+            <section class="profile">
+                <div class="profile-box">
+                    <h3>환영합니다</h3>
+                    <h4 id="profileName">사용자님</h4>
+                    <img src="../images/mainid_icon.svg" alt="User Profile Icon" />
+                    <h3>현재 점수: <span id="profileScore">0</span> 점</h3>
+                </div>
+            </section>
+    
+            <section class="progress">
+                <a href="wargame_log.html" class="game-button">워게임 풀러가기</a>
+            </section>
+        </div>
+    </main>
+
+    <script>
+        // 메시지 박스 열기/닫기
+        const userIcon = document.getElementById('userIcon');
+        const box = document.querySelector('.box');
+        const closeButton = document.querySelector('.close_button');
+    
+        userIcon.addEventListener('click', function() {
+            box.classList.add('box_active');
+        });
+    
+        closeButton.addEventListener('click', function() {
+            box.classList.remove('box_active');
+        });
+
+        // 로그아웃 기능
+        const logoutButton = document.getElementById('logoutButton');
+        logoutButton.addEventListener('click', async () => {
+            try {
+                const response = await fetch('/logout', {
+                    method: 'GET',
+                });
+                if (response.ok) {
+                    alert('로그아웃되었습니다.');
+                    window.location.href = '../main.html'; // 로그아웃 후 리디렉션
+                } else {
+                    alert('로그아웃에 실패했습니다.');
+                }
+            } catch (err) {
+                console.error('로그아웃 요청 실패:', err);
+                alert('로그아웃 요청 중 문제가 발생했습니다.');
+            }
+        });
+
+        // 서버에서 사용자 데이터 가져오기
+        async function fetchUserData() {
+            try {
+                const response = await fetch('/getUserData'); // 서버에서 사용자 데이터 요청
+                if (response.ok) {
+                    const data = await response.json();
+                    // 사용자 데이터 삽입
+                    document.getElementById('userName').textContent = `${data.name}님`;
+                    document.getElementById('userInfo').innerHTML = `
+                        ${data.name}님<br>${data.email}<br>현재 점수: ${data.totalScore}`;
+                    document.getElementById('profileName').textContent = `${data.name}님`;
+                    document.getElementById('profileScore').textContent = data.totalScore;
+                } else {
+                    console.error('사용자 데이터를 가져오는 데 실패했습니다.');
+                }
+            } catch (err) {
+                console.error('사용자 데이터 요청 실패:', err);
+            }
+        }
+
+        // 페이지 로드 시 사용자 데이터 가져오기 실행
+        fetchUserData();
+    </script>
+</body>
+</html>

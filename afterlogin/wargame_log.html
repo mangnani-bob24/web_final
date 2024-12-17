@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>워게임</title>
+    <link rel="stylesheet" href="wargame_log.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="main_log.html">팀 소개</a></li>
+                <li><a href="wargame_log.html">워게임</a></li>
+                <li><a href="announce_log.html">홍보 및 소식</a></li>
+                <li class="right">
+                    <img src="../images/id_icon.svg" alt="User Icon" class="id-icon" id="userIcon">
+                    <span id="userName">사용자님</span>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- 메시지 박스 -->
+    <div class="box">
+        <div class="message">
+            <p id="userInfo">사용자 정보</p>
+            <div class="button_box">
+                <button class="logout_button"><a href="/logout">로그아웃</a></button>
+                <button class="close_button">닫기</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 가운데 정렬된 이미지 추가 -->
+    <div class="image-banner">
+        <img src="../images/wargame_banner_notlog.svg" alt="Center Image" class="banner-image">
+    </div>
+    <div class="image-container">
+        <img src="../images/github.png" alt="Center Image" class="center-image">
+    </div>
+ 
+    <!-- 깃헙 링크 -->
+    <p><a href="https://github.com/mangnani-bob24/mang_wargame">워게임 환경구성 바로가기</a></p>
+
+    <!-- 아코디언 -->
+    <div class="accordion">
+        <!-- 워게임 1 -->
+        <button class="btbt01">Misconfig<br>50</button>
+        <div class="ppp">
+            <h4>Insecure interfaces and APIs</h4>
+            <form class="flag-form">
+                <input type="text" id="flag1" name="flag1" placeholder="flag를 입력하세요">
+                <button type="button" class="submit-btn" onclick="checkFlag(1)">제출</button>
+            </form>
+            <p class="feedback" id="feedback1"></p>
+        </div>
+
+        <!-- 워게임 2 -->
+        <button class="btbt02">API<br>100</button>
+        <div class="ppp">
+            <h4>Insecure software development</h4>
+            <form class="flag-form">
+                <input type="text" id="flag2" name="flag2" placeholder="flag를 입력하세요">
+                <button type="button" class="submit-btn" onclick="checkFlag(2)">제출</button>
+            </form>
+            <p class="feedback" id="feedback2"></p>
+        </div>
+
+        <!-- 워게임 3 -->
+        <button class="btbt03">vulnSWD<br>150</button>
+        <div class="ppp">
+            <h4>내용 3</h4>
+            <form class="flag-form">
+                <input type="text" id="flag3" name="flag3" placeholder="flag를 입력하세요">
+                <button type="button" class="submit-btn" onclick="checkFlag(3)">제출</button>
+            </form>
+            <p class="feedback" id="feedback3"></p>
+        </div>
+
+        
+        <!-- 워게임 4 
+        <button class="btbt04">워게임 4<br>200</button>
+        <div class="ppp">
+            <h4>내용 4</h4>
+            <form class="flag-form">
+                <input type="text" id="flag4" name="flag4" placeholder="flag를 입력하세요">
+                <button type="button" class="submit-btn" onclick="checkFlag(4)">제출</button>
+            </form>
+            <p class="feedback" id="feedback4"></p>
+        </div>
+
+        워게임 5 
+        <button class="btbt05">워게임 5<br>250</button>
+        <div class="ppp">
+            <h4>내용 4</h4>
+            <form class="flag-form">
+                <input type="text" id="flag5" name="flag5" placeholder="flag를 입력하세요">
+                <button type="button" class="submit-btn" onclick="checkFlag(5)">제출</button>
+            </form>
+            <p class="feedback" id="feedback5"></p>
+        </div>
+
+        워게임 6
+        <button class="btbt04">워게임 6<br>300</button>
+        <div class="ppp">
+            <h4>내용 6</h4>
+            <form class="flag-form">
+                <input type="text" id="flag6" name="flag6" placeholder="flag를 입력하세요">
+                <button type="button" class="submit-btn" onclick="checkFlag(6)">제출</button>
+            </form>
+            <p class="feedback" id="feedback6"></p>
+        </div>
+
+       워게임 7
+        <button class="btbt04">워게임 7<br>350</button>
+        <div class="ppp">
+            <h4>내용 7</h4>
+            <form class="flag-form">
+                <input type="text" id="flag7" name="flag7" placeholder="flag를 입력하세요">
+                <button type="button" class="submit-btn" onclick="checkFlag(7)">제출</button>
+            </form>
+            <p class="feedback" id="feedback7"></p>
+        </div>
+        -->
+
+    </div>
+
+    <script>
+        // 사용자 데이터 가져오기
+        async function fetchUserData() {
+            try {
+                const response = await fetch('/getUserData');
+                if (response.ok) {
+                    const user = await response.json();
+                    document.getElementById('userName').textContent = `${user.name}님`;
+                    document.getElementById('userInfo').innerHTML = `이메일: ${user.email}<br>현재 점수: ${user.totalScore}`;
+                } else {
+                    alert('사용자 데이터를 가져오는 데 실패했습니다.');
+                }
+            } catch (err) {
+                console.error('사용자 데이터 요청 실패:', err);
+            }
+        }
+
+        // 플래그 값 검증 및 점수 업데이트
+        const flags = {
+            1: "mn-coNf1G",
+            2: "mn-Final-Flag-Only",
+            3: "mn-Tr4v3rs4lfl4g",
+            /*
+            4: "correct_flag4",
+            5: "correct_flag5",
+            6: "correct_flag6",
+            7: "correct_flag7",*/
+        };
+
+    async function checkFlag(index) {
+        const input = document.getElementById(`flag${index}`);
+        const feedback = document.getElementById(`feedback${index}`);
+        const enteredFlag = input.value.trim();
+
+        if (enteredFlag === flags[index]) {
+            feedback.textContent = "정답입니다!";
+            feedback.style.color = "green";
+
+            try {
+                // 점수 저장 요청
+                const response = await fetch('/submitScore', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ problemId: index, score: index * 50 }), // 문제별 점수
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    alert(`정답입니다! 현재 총 점수: ${data.totalScore}`);
+                } else {
+                    alert('점수 저장에 실패했습니다.');
+                }
+            } catch (err) {
+                console.error('점수 저장 요청 실패:', err);
+            }
+
+            // 입력 필드 비활성화
+            input.disabled = true;
+        } else {
+            feedback.textContent = "틀렸습니다. 다시 시도하세요.";
+            feedback.style.color = "red";
+        }
+    }
+
+
+        // 아코디언 열고 닫기
+        const accordionButtons = document.querySelectorAll('.accordion button');
+        accordionButtons.forEach((button) => {
+            button.addEventListener('click', () => {
+                const content = button.nextElementSibling;
+                if (content.style.display === 'block') {
+                    content.style.display = 'none';
+                } else {
+                    document.querySelectorAll('.accordion .ppp').forEach((ppp) => {
+                        ppp.style.display = 'none';
+                    });
+                    content.style.display = 'block';
+                }
+            });
+        });
+
+        // 메시지 박스 열기/닫기
+        const userIcon = document.getElementById('userIcon');
+        const box = document.querySelector('.box');
+        const closeButton = document.querySelector('.close_button');
+
+        userIcon.addEventListener('click', () => box.classList.add('box_active'));
+        closeButton.addEventListener('click', () => box.classList.remove('box_active'));
+
+        // 페이지 로드 시 사용자 데이터 가져오기
+        fetchUserData();
+    </script>
+</body>
+</html>
